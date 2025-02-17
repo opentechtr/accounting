@@ -1,0 +1,7 @@
+package com.otcp.Accounting.product.repository;
+
+import com.otcp.Accounting.product.entity.Category;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CategoryRepository extends JpaRepository<Category, Long> {
+}
