@@ -2,6 +2,7 @@ package com.otcp.Accounting.supplier.entity;
 
 
 
+import com.otcp.Accounting.common.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
@@ -11,11 +12,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "supplier_invoice")
-public class SupplierInvoice {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class SupplierInvoice extends BaseEntity {
     @NotBlank(message = "Invoice number is mandatory")
     @Column(unique = true)
     private String invoiceNumber;
@@ -25,14 +22,6 @@ public class SupplierInvoice {
 
     @Positive(message = "Amount must be positive")
     private BigDecimal amount;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-
-    @PrePersist
-    protected void onCreate() { createdAt = LocalDateTime.now(); }
-
-    @PreUpdate
-    protected void onUpdate() { updatedAt = LocalDateTime.now(); }
 
     @ManyToOne
     @JoinColumn(name = "supplier_id", nullable = false)

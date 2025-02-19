@@ -1,18 +1,18 @@
 package com.otcp.Accounting.tax.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import com.otcp.Accounting.common.BaseEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tax")
-public class Tax {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class Tax extends BaseEntity {
     @NotBlank(message = "Tax name is mandatory")
     @Column(unique = true)
     private String name;
@@ -23,15 +23,7 @@ public class Tax {
     @Size(max = 500, message = "Description can be up to 500 characters")
     private String description;
 
-    private boolean isActive;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-
-    @PrePersist
-    protected void onCreate() { createdAt = LocalDateTime.now(); isActive = true; }
-
-    @PreUpdate
-    protected void onUpdate() { updatedAt = LocalDateTime.now(); }
+    private boolean isActive = true;
 
     // Detailed Getters and setters including isActive toggle
 }

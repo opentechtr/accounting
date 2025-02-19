@@ -1,16 +1,13 @@
 package com.otcp.Accounting.customer.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
-
-import java.time.LocalDateTime;
+import com.otcp.Accounting.common.BaseEntity;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
-public class Address {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Address extends BaseEntity {
 
     @NotBlank(message = "Street is mandatory")
     private String street;
@@ -26,14 +23,6 @@ public class Address {
 
     @NotBlank(message = "Country is mandatory")
     private String country;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-
-    @PrePersist
-    protected void onCreate() { createdAt = LocalDateTime.now(); }
-
-    @PreUpdate
-    protected void onUpdate() { updatedAt = LocalDateTime.now(); }
 
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)

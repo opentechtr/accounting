@@ -1,20 +1,16 @@
 package com.otcp.Accounting.supplier.entity;
 
+import com.otcp.Accounting.common.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table(name = "supplier")
-public class Supplier {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class Supplier extends BaseEntity {
     @NotBlank(message = "Supplier name is mandatory")
     @Column(unique = true)
     private String name;
@@ -31,15 +27,6 @@ public class Supplier {
     @NotBlank(message = "Tax number is mandatory")
     @Column(unique = true)
     private String taxNumber;
-
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-
-    @PrePersist
-    protected void onCreate() { createdAt = LocalDateTime.now(); }
-
-    @PreUpdate
-    protected void onUpdate() { updatedAt = LocalDateTime.now(); }
 
     @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SupplierInvoice> invoices;

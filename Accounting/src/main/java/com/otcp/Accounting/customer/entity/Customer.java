@@ -1,21 +1,19 @@
 package com.otcp.Accounting.customer.entity;
 
 
+import com.otcp.Accounting.common.BaseEntity;
 import com.otcp.Accounting.invoice.entity.Invoice;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Customer {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Customer extends BaseEntity {
 
     @NotBlank(message = "First name is mandatory")
     private String firstName;
@@ -36,14 +34,6 @@ public class Customer {
     private String companyName;
     private Date dateOfBirth;
     private String notes;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-
-    @PrePersist
-    protected void onCreate() { createdAt = LocalDateTime.now(); }
-
-    @PreUpdate
-    protected void onUpdate() { updatedAt = LocalDateTime.now(); }
 
     @Enumerated(EnumType.STRING)
     private CustomerStatus status;
