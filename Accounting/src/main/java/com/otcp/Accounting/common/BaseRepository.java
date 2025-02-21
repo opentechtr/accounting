@@ -8,7 +8,8 @@ import java.util.Optional;
 public interface BaseRepository<T extends BaseEntity, ID extends Long> extends JpaRepository<T, ID > {
 
     default T getById(ID id) {
-        return findById(id).orElseThrow(() -> new RuntimeException("Entity not found")); //TODO replace with custom exception.
+        return findById(id)
+                .orElseThrow(() -> new RuntimeException("Entity not found")); //TODO replace with custom exception.
     }
 
     Optional<T> findByGuid(String guid);
@@ -18,7 +19,8 @@ public interface BaseRepository<T extends BaseEntity, ID extends Long> extends J
     Optional<T> findByGuidAndEntityStatus(String guid, EntityStatus entityStatus);
 
     default T getByGuid(String guid) {
-        return findByGuid(guid).orElseThrow(() -> new RuntimeException("Entity not found")); //TODO replace with custom exception.
+        return findByGuid(guid)
+                .orElseThrow(() -> new RuntimeException("Entity not found")); //TODO replace with custom exception.
     }
 
     List<T> findAllByEntityStatus(EntityStatus entityStatus);
