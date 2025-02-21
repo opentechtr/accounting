@@ -1,21 +1,18 @@
 package com.otcp.Accounting.invoice.entity;
 
+import com.otcp.Accounting.common.BaseEntity;
 import com.otcp.Accounting.customer.entity.Customer;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 
 @Entity
-public class Invoice {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class Invoice extends BaseEntity {
     @NotBlank(message = "Invoice number is required")
     private String invoiceNumber;
 
@@ -41,15 +38,6 @@ public class Invoice {
     private byte[] invoiceFile;
 
     private String fileType;
-
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-
-    @PrePersist
-    protected void onCreate() { createdAt = LocalDateTime.now(); }
-
-    @PreUpdate
-    protected void onUpdate() { updatedAt = LocalDateTime.now(); }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false)

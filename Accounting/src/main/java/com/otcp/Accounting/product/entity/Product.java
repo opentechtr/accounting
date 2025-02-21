@@ -1,22 +1,19 @@
 package com.otcp.Accounting.product.entity;
 
 
-
+import com.otcp.Accounting.common.BaseEntity;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "product")
-public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class Product extends BaseEntity {
     @NotBlank(message = "Product name is mandatory")
     private String name;
 
@@ -36,15 +33,6 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
-
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-
-    @PrePersist
-    protected void onCreate() { createdAt = LocalDateTime.now(); }
-
-    @PreUpdate
-    protected void onUpdate() { updatedAt = LocalDateTime.now(); }
 
     // Getters and setters with validations
 }

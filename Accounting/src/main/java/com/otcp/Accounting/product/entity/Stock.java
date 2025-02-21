@@ -1,17 +1,15 @@
 package com.otcp.Accounting.product.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
-
-import java.time.LocalDateTime;
+import com.otcp.Accounting.common.BaseEntity;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.PositiveOrZero;
 
 @Entity
 @Table(name = "stock")
-public class Stock {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class Stock extends BaseEntity {
     @PositiveOrZero(message = "Quantity cannot be negative")
     private int quantity;
 
@@ -22,14 +20,6 @@ public class Stock {
     @ManyToOne
     @JoinColumn(name = "warehouse_id", nullable = false)
     private Warehouse warehouse;
-
-    private LocalDateTime lastUpdated;
-
-    @PrePersist
-    protected void onCreate() { lastUpdated = LocalDateTime.now(); }
-
-    @PreUpdate
-    protected void onUpdate() { lastUpdated = LocalDateTime.now(); }
 
     // Getters and setters
 }

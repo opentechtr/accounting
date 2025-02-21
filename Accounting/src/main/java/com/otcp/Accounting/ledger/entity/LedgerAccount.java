@@ -1,19 +1,20 @@
 package com.otcp.Accounting.ledger.entity;
 
+import com.otcp.Accounting.common.BaseEntity;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 
-import java.time.LocalDateTime;
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "ledger_account")
-public class LedgerAccount {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class LedgerAccount extends BaseEntity {
 
     @NotBlank(message = "Account name is mandatory")
     @Column(unique = true)
@@ -27,14 +28,14 @@ public class LedgerAccount {
     private AccountType type;
 
     @PositiveOrZero(message = "Balance cannot be negative")
-    private BigDecimal balance;
+    private BigDecimal balance = BigDecimal.ZERO; ;
 
     @Size(max = 500, message = "Description can be up to 500 characters")
     private String description;
 
-    private boolean isActive;
-    private BigDecimal openingBalance;
-    private BigDecimal closingBalance;
+    private boolean isActive = true;
+    private BigDecimal openingBalance = BigDecimal.ZERO;
+    private BigDecimal closingBalance = BigDecimal.ZERO;
 
     @OneToMany(mappedBy = "debitAccount", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<JournalEntry> debitEntries = new ArrayList<>();
@@ -42,15 +43,7 @@ public class LedgerAccount {
     @OneToMany(mappedBy = "creditAccount", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<JournalEntry> creditEntries = new ArrayList<>();
 
-    private String externalId;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-
-    @PrePersist
-    protected void onCreate() { createdAt = LocalDateTime.now(); balance = BigDecimal.ZERO; openingBalance = BigDecimal.ZERO; closingBalance = BigDecimal.ZERO; isActive = true; externalId = UUID.randomUUID().toString(); }
-
-    @PreUpdate
-    protected void onUpdate() { updatedAt = LocalDateTime.now(); }
+    private String externalId = UUID.randomUUID().toString();
 
     public BigDecimal calculateBalance() {
         BigDecimal totalDebits = debitEntries.stream().map(JournalEntry::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);

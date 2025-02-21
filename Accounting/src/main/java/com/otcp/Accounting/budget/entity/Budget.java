@@ -1,18 +1,16 @@
 package com.otcp.Accounting.budget.entity;
 
-import jakarta.persistence.*;
+import com.otcp.Accounting.common.BaseEntity;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-public class Budget {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class Budget extends BaseEntity {
     private String name;
     private BigDecimal totalAmount;
     private BigDecimal allocatedAmount;
@@ -20,14 +18,6 @@ public class Budget {
     private LocalDate startDate;
     private LocalDate endDate;
     private String description;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-
-    @PrePersist
-    protected void onCreate() { createdAt = LocalDateTime.now(); }
-
-    @PreUpdate
-    protected void onUpdate() { updatedAt = LocalDateTime.now(); }
 
     @OneToMany(mappedBy = "budget", cascade = CascadeType.ALL)
     private List<Expense> expenses;

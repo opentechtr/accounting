@@ -1,23 +1,21 @@
 package com.otcp.Accounting.ledger.entity;
 
+import com.otcp.Accounting.common.BaseEntity;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "journal_entry")
-public class JournalEntry {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class JournalEntry extends BaseEntity {
 
     @NotBlank(message = "Description is mandatory")
     @Size(max = 255, message = "Description can be up to 255 characters")
     private String description;
-
-    private LocalDateTime entryDate;
 
     @ManyToOne
     @JoinColumn(name = "debit_account_id", nullable = false)
@@ -38,33 +36,24 @@ public class JournalEntry {
     private String referenceNumber;
 
     private String currency;
-    private String createdBy;
     private LocalDateTime approvedAt;
     private LocalDateTime transactionDate;
     private boolean isReversed;
     private String notes;
 
-    @PrePersist
-    protected void onCreate() { entryDate = LocalDateTime.now(); }
+    public void approve(String user) {
+        this.approvedAt = LocalDateTime.now();
+    }
 
-    public void approve(String user) { this.approvedAt = LocalDateTime.now(); this.createdBy = user; }
-
-    public void reverseEntry() { this.isReversed = true; }
+    public void reverseEntry() {
+        this.isReversed = true;
+    }
 
     public String exportToCSV() {
-        return id + "," + description + "," + transactionType + "," + amount + "," + currency;
+        return this.getId() + "," + description + "," + transactionType + "," + amount + "," + currency;
     }
 
     // Enhanced with audit tracking, reconciliation reports, CSV/JSON/XML export, transaction templates, budget allocations, and tax compliance checks
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getDescription() {
         return description;
@@ -72,14 +61,6 @@ public class JournalEntry {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public LocalDateTime getEntryDate() {
-        return entryDate;
-    }
-
-    public void setEntryDate(LocalDateTime entryDate) {
-        this.entryDate = entryDate;
     }
 
     public LedgerAccount getDebitAccount() {
@@ -130,14 +111,6 @@ public class JournalEntry {
         this.currency = currency;
     }
 
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
     public LocalDateTime getApprovedAt() {
         return approvedAt;
     }
@@ -173,16 +146,14 @@ public class JournalEntry {
     @Override
     public String toString() {
         return "JournalEntry{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", description='" + description + '\'' +
-                ", entryDate=" + entryDate +
                 ", debitAccount=" + debitAccount +
                 ", creditAccount=" + creditAccount +
                 ", amount=" + amount +
                 ", transactionType='" + transactionType + '\'' +
                 ", referenceNumber='" + referenceNumber + '\'' +
                 ", currency='" + currency + '\'' +
-                ", createdBy='" + createdBy + '\'' +
                 ", approvedAt=" + approvedAt +
                 ", transactionDate=" + transactionDate +
                 ", isReversed=" + isReversed +
