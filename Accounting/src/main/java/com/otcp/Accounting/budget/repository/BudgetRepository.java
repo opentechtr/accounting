@@ -1,7 +1,7 @@
 package com.otcp.Accounting.budget.repository;
 
 import com.otcp.Accounting.budget.entity.Budget;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.otcp.Accounting.common.BaseRepository;
 
-public interface BudgetRepository extends JpaRepository<Budget, Long> {
+public interface BudgetRepository extends BaseRepository<Budget, Long> {
 }

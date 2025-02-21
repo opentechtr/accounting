@@ -1,7 +1,8 @@
 package com.otcp.Accounting.ledger.repository;
 
+import com.otcp.Accounting.common.BaseRepository;
 import com.otcp.Accounting.ledger.entity.JournalEntry;
-import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface JournalEntryRepository extends JpaRepository<JournalEntry, Long> {
+public interface JournalEntryRepository extends BaseRepository<JournalEntry, Long> {
+
 }
