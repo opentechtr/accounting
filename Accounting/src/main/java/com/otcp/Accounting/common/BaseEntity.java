@@ -93,14 +93,14 @@ public abstract class BaseEntity {
     }
 
     public void delete() {
-        if (EntityStatus.ACTIVATE.equals(getEntityStatus())) {
+        if (EntityStatus.ACTIVE.equals(getEntityStatus())) {
             this.entityStatus = EntityStatus.DELETED;
         }
     }
 
     public void activate() {
         if (EntityStatus.DELETED.equals(getEntityStatus())) {
-            this.entityStatus = EntityStatus.ACTIVATE;
+            this.entityStatus = EntityStatus.ACTIVE;
         }
     }
 }

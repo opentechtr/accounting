@@ -1,6 +1,6 @@
 
 package com.otcp.Accounting.ledger.service;
-import com.example.accounting.ledger.entity.*;
+
 import com.otcp.Accounting.ledger.entity.JournalEntry;
 import com.otcp.Accounting.ledger.entity.LedgerAccount;
 

@@ -1,7 +1,7 @@
 package com.otcp.Accounting.customer.repository;
 
+import com.otcp.Accounting.common.BaseRepository;
 import com.otcp.Accounting.customer.entity.Customer;
-import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CustomerRepository extends JpaRepository<Customer, Long> {
+public interface CustomerRepository extends BaseRepository<Customer, Long> {
 }
