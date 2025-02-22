@@ -1,7 +1,7 @@
 package com.otcp.Accounting.customer.entity;
 
 
-import com.otcp.Accounting.common.BaseEntity;
+import com.otcp.Accounting.common.baseEntity.BaseEntity;
 import com.otcp.Accounting.invoice.entity.Invoice;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;

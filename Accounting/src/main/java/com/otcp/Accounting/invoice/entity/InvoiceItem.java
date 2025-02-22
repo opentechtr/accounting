@@ -1,6 +1,6 @@
 package com.otcp.Accounting.invoice.entity;
 
-import com.otcp.Accounting.common.BaseEntity;
+import com.otcp.Accounting.common.baseEntity.BaseEntity;
 import com.otcp.Accounting.product.entity.Product;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
