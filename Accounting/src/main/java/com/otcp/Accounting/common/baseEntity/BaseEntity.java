@@ -1,4 +1,4 @@
-package com.otcp.Accounting.common;
+package com.otcp.Accounting.common.baseEntity;
 
 import com.otcp.Accounting.user.entity.User;
 import jakarta.persistence.*;

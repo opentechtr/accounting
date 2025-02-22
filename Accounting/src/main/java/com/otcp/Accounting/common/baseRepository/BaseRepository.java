@@ -1,5 +1,7 @@
-package com.otcp.Accounting.common;
+package com.otcp.Accounting.common.baseRepository;
 
+import com.otcp.Accounting.common.baseEntity.BaseEntity;
+import com.otcp.Accounting.common.baseEntity.EntityStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
