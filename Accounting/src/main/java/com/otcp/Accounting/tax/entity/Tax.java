@@ -1,6 +1,6 @@
 package com.otcp.Accounting.tax.entity;
 
-import com.otcp.Accounting.common.BaseEntity;
+import com.otcp.Accounting.common.baseEntity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

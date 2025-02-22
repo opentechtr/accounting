@@ -1,6 +1,6 @@
 package com.otcp.Accounting.supplier.entity;
 
-import com.otcp.Accounting.common.BaseEntity;
+import com.otcp.Accounting.common.baseEntity.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

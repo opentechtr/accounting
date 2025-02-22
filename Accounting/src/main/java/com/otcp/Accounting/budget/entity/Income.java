@@ -1,6 +1,6 @@
 package com.otcp.Accounting.budget.entity;
 
-import com.otcp.Accounting.common.BaseEntity;
+import com.otcp.Accounting.common.baseEntity.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
